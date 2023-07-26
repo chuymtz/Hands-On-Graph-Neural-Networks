@@ -1,5 +1,6 @@
 import numpy as np
 from pprint import pprint
+from gensim.models.word2vec import Word2Vec
 
 CONTEXT_SIZE = 2
 text = """
@@ -29,7 +30,7 @@ for i in range(CONTEXT_SIZE, len(text) - CONTEXT_SIZE):
     # text[i] is the target word is the input and we want to predict the array 
     skipgrams.append((text[i], array))
 
-pprint(skipgrams)
+pprint(skipgrams[:10])
 
 
 vocab = set(text)
@@ -39,10 +40,21 @@ print(f"{VOCAB_SIZE = }")
 # the dimension of the embedding is defined by the user
 
 
+model = Word2Vec([text],
+                 sg=1,   # Skip-gram
+                 hs=1,
+                 vector_size=10,
+                 min_count=0,
+                 window=2,
+                 workers=2,
+                 seed=0)
+
+print(f'Shape of W_embed: {model.wv.vectors.shape}')
 
 
-
-
+model.train([text], total_examples=model.corpus_count, epochs=100)
+print('Word embedding =')
+print(model.wv[0])
 
 
 

@@ -25,17 +25,16 @@ for node in G.nodes:
 
 np.array(walks).shape
 
+# Create and train Word2Vec for DeepWalk
 node2vec = Word2Vec(walks,
-                    hs=1,   # Hierarchical softmax
-                    sg=1,   # Skip-gram
-                    vector_size=100,
-                    window=10,
-                    workers=2,
-                    min_count=1,
-                    seed=0)
-
-# train to our walks
-node2vec.train(walks, total_examples=node2vec.corpus_count, epochs=15, report_delay=1)
+                hs=1,   # Hierarchical softmax
+                sg=1,   # Skip-gram
+                vector_size=100,
+                window=10,
+                workers=2,
+                min_count=1,
+                seed=0)
+node2vec.train(walks, total_examples=node2vec.corpus_count, epochs=30, report_delay=1)
 
 
 # CLASSIFIER ------------------------------------
@@ -50,6 +49,10 @@ clf = RandomForestClassifier(random_state=0)
 clf.fit(node2vec.wv[train_mask_str], labels[train_mask])
 
 y_pred = clf.predict(node2vec.wv[test_mask_str])
+acc = accuracy_score(y_pred, labels[test_mask])
+print(f'Node2Vec accuracy = {acc*100:.2f}%')
+
+y_pred = clf.predict(node2vec.wv[test_mask])
 acc = accuracy_score(y_pred, labels[test_mask])
 print(f'Node2Vec accuracy = {acc*100:.2f}%')
 

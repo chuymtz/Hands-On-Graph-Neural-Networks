@@ -42,17 +42,19 @@ def next_node(G, previous, current, p, q):
     next = np.random.choice(neighbors, size=1, p=probs)[0]
     return next
 
-def random_walk(start, length, p, q):
+def random_walk(G, start, length, p, q):
     walk = [start]
     for i in range(length):
         current = walk[-1]
         previous = walk[-2] if len(walk) > 1 else None
-        next = next_node(previous, current, p, q)
+        next = next_node(G, previous, current, p, q)
         walk.append(next)
     return [str(x) for x in walk]
 
 # next_ = next_node(G, 4, 3, 1, 1)
-random_walk(0, 8, p=1, q=1)
+random_walk(G, 0, 8, p=1, q=1)
+random_walk(G, 0, 8, p=1, q=10)
+random_walk(G, 0, 8, p=10, q=1)
 draw_g(G)
 
 

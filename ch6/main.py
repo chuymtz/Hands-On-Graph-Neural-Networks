@@ -101,7 +101,7 @@ event_probability = 0.1
 duration = int(random.uniform(10, 100))
 
 # Add the random event
-for i in range(len(q)):
+for i in range(len(q) - duration):
   if random.random() < event_probability:
     q[i] -= drop_size
     for j in range(i, i+duration):
@@ -110,5 +110,3 @@ for i in range(len(q)):
 # Plot the data
 plt.plot(t, q)
 plt.show()
-
-

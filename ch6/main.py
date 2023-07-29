@@ -1,14 +1,14 @@
 import networkx as nx
 import random
-random.seed(0)
 import numpy as np
 np.random.seed(0)
 from src.utils import draw_g
+from node2vec import Node2Vec
 
-G = nx.erdos_renyi_graph(10, 0.3, seed=1, directed=False)
+# G = nx.erdos_renyi_graph(10, 0.3, seed=1, directed=False)
 
-draw_g(G)
-G.nodes
+# draw_g(G)
+# G.nodes
 
 
 # previous = 0
@@ -52,10 +52,10 @@ def random_walk(G, start, length, p, q):
     return [str(x) for x in walk]
 
 # next_ = next_node(G, 4, 3, 1, 1)
-random_walk(G, 0, 8, p=1, q=1)
-random_walk(G, 0, 8, p=1, q=10)
-random_walk(G, 0, 8, p=10, q=1)
-draw_g(G)
+# random_walk(G, 0, 8, p=1, q=1)
+# random_walk(G, 0, 8, p=1, q=10)
+# random_walk(G, 0, 8, p=10, q=1)
+# draw_g(G)
 
 
 

@@ -7,3 +7,6 @@
 *.index
 *.graph
 *.npz
+.env8
+.env*
+.vscode

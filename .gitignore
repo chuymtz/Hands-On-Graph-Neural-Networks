@@ -1,2 +1,9 @@
 .env
 */__pycache__/*
+*/cora/
+*.pt
+*.x
+*.y
+*.index
+*.graph
+*.npz
